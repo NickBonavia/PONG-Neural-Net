@@ -37,7 +37,7 @@ script = ExtResource( 3 )
 [node name="StaticBody2D" type="Area2D" parent="AI_Player"]
 
 [node name="Area2D" type="CollisionShape2D" parent="AI_Player/StaticBody2D"]
-position = Vector2( -14.0107, 3.05176e-05 )
+position = Vector2( -14.0107, 3.05176e-005 )
 shape = SubResource( 1 )
 
 [node name="Ball" parent="." groups=[

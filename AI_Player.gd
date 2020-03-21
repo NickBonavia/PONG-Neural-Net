@@ -1,10 +1,17 @@
 extends RigidBody2D
 
-# Declare member variables here. Examples:
+# Declare member variables here
+# Old from Lab #1
 var prevPos = Vector2(-1, -1)
 var STM : Dictionary
 var stateStack : Array
 var BETA = 0.35
+
+# New vars for Lab #2
+
+onready var w1 = NumGD.fileToMatrix("matrix1.out")
+onready var w2 = NumGD.fileToMatrix("matrix2.out")
+onready var w3 = NumGD.fileToMatrix("matrix3.out")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,55 +36,65 @@ func max_index(arr : Array):
 # AI determines what move to make based
 # on STM
 func _on_Ball_Moved_Tile(indices : Vector2):
+	# get input and normalize values
+	var input = NumGD.Matrix.new([1, 2])
+	input.setVal(0, 0, indices[0]/10)
+	input.setVal(0, 1, indices[1]/10)
 	
-	if (stateStack.size() > 100):
-		stateStack.clear()
-		$"../Ball".resetBall()
+	var move = input.dot(w1).sigmoid().dot(w2).sigmoid().dot(w3).sigmoid()
 	
-	var paddlePos = round(self.position.y/60)
-	var transition
-	
-	if prevPos == Vector2(-1, -1):
-		prevPos = indices
-		return
-	var state = str([prevPos, indices, int(paddlePos)])
-	if STM.has(state):
-		transition = STM[state]
-	
-	else:
-		var prob = 1.0/3.0
-		var newState = [prob, prob, prob]
-		
-		if (paddlePos + 1) > 10:
-			newState[0] = 0
-			newState[1] = 1.0/2.0
-			newState[2] = 1.0/2.0
-		elif (paddlePos - 1) < 0:
-			newState[0] = 1.0/2.0
-			newState[1] = 1.0/2.0
-			newState[2] = 0
-
-		transition = newState
-		STM[state] = transition
-	
-	var maxIndex = max_index(transition)
-	
-	if transition[0] == transition[1] and transition[1] == transition[2]:
-		maxIndex = randi() % 3
-	
-	if maxIndex == 0:
-		# move down
-		self.position.y += 60
-	elif maxIndex == 2:
-		# move up
-		self.position.y -= 60
-	stateStack.push_front(state)
-	prevPos = indices
+	self.position.y = move.getVal(0, 0) * 600
+#	if (stateStack.size() > 100):
+#		stateStack.clear()
+#		$"../Ball".resetBall()
+#
+#	var paddlePos = round(self.position.y/60)
+#	var transition
+#
+#	if prevPos == Vector2(-1, -1):
+#		prevPos = indices
+#		return
+#	var state = str([prevPos, indices, int(paddlePos)])
+#	if STM.has(state):
+#		transition = STM[state]
+#
+#	else:
+#		var prob = 1.0/3.0
+#		var newState = [prob, prob, prob]
+#
+#		if (paddlePos + 1) > 10:
+#			newState[0] = 0
+#			newState[1] = 1.0/2.0
+#			newState[2] = 1.0/2.0
+#		elif (paddlePos - 1) < 0:
+#			newState[0] = 1.0/2.0
+#			newState[1] = 1.0/2.0
+#			newState[2] = 0
+#
+#		transition = newState
+#		STM[state] = transition
+#
+#	var maxIndex = max_index(transition)
+#
+#	if transition[0] == transition[1] and transition[1] == transition[2]:
+#		maxIndex = randi() % 3
+#
+#	if maxIndex == 0:
+#		# move down
+#		self.position.y += 60
+#	elif maxIndex == 2:
+#		# move up
+#		self.position.y -= 60
+#	stateStack.push_front(state)
+#	prevPos = indices
 
 # Signal handler for punishing AI
 # for missing Ball
 func _on_Game_punish_AI():
-	
+	## This code isn't used anymore
+	## so we pass instead of exec.
+	## Left for historical purpose.
+	pass
 	get_parent().misses += 1.0
 	self.position.y = (randi()%10) * 60
 	
@@ -115,7 +132,10 @@ func _on_Game_punish_AI():
 # collective moves for a successful
 # Ball hit
 func _on_AI_Good_Boi(body):
-	
+	## This code isn't used anymore
+	## so we pass instead of exec.
+	## Left for historical purpose.
+	pass
 	# if not training just return
 	if $"../".play != false:
 		return

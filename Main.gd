@@ -27,14 +27,14 @@ func _ready():
 # Signal handler for ball entering
 # Player goal
 func _on_AreaGoalP_body_entered(body):
-	print("AI Scored")
+	print("Old Collective Learning Scored")
 	$Ball.resetBall()
 
 # Signal handlerfor ball entering
 # AI goal. Emits the punish_AI singal
 # when training
 func _on_AreaGoalAI_body_entered(body):
-	print("Player Scored")
+	print("Neural Net Scored")
 	if play == false:
 		emit_signal("punish_AI")
 	$Ball.resetBall()
@@ -56,7 +56,7 @@ func _on_LoadButton_pressed():
 	get_tree().paused = true
 	var filename = $GUI/LoadTextBox.text
 	var file = File.new()
-	file.open(filename, File.READ);
+	file.open(filename, File.READ)
 	$AI_Player.STM.clear()
 	$AI_Player.stateStack.clear()
 	$AI_Player.position.y = 300

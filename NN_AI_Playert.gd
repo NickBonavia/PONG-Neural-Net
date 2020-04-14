@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+signal hitBall
+
 # Declare member variables here
 # Old from Lab #1
 var prevPos = Vector2(-1, -1)

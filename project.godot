@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 NumGD="*res://NumGD.gd"
+AINode="*res://AINode.gd"
 
 [display]
 

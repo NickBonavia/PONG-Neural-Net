@@ -9,6 +9,7 @@ onready var theta = randAngle()
 onready var velocity = Vector2((1 - 2*(randi()%2)) * speed, 10)
 onready var rotVeloc = rotateVec2(velocity)
 onready var locIndex = Vector2(int(self.position.x/60), int(self.position.y/60))
+onready var prevSect = locIndex.x 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -46,5 +47,7 @@ func _process(delta):
 	
 	# If position has changed, emit signal for AI_Player
 	if (tmp.x != locIndex.x) || (tmp.y != locIndex.y):
-		emit_signal("Moved_Tile", tmp)
+		if tmp.x != prevSect:
+			prevSect = tmp.x
+			emit_signal("Moved_Tile", tmp)
 		locIndex = tmp

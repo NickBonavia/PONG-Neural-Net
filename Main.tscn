@@ -71,9 +71,9 @@ margin_left = -222.0
 margin_top = -734.421
 margin_right = 222.0
 margin_bottom = -673.421
-text = "Trained Neural Network on Left side.
+text = "Trained Neural Network on Left side. From previous lab..
 
-Collective Learning from Lab 1 on right side, using 12hrs_training.json"
+MiniMax with Alpha Beta Pruning on Right"
 align = 1
 valign = 1
 
@@ -108,8 +108,8 @@ shape = SubResource( 7 )
 [node name="StatsTimer" type="Timer" parent="."]
 [connection signal="punish_AI" from="." to="AI_Player" method="_on_Game_punish_AI"]
 [connection signal="body_entered" from="AI_Player/StaticBody2D" to="AI_Player" method="_on_AI_Good_Boi"]
-[connection signal="Moved_Tile" from="Ball" to="AI_Player" method="_on_Ball_Moved_Tile"]
 [connection signal="Moved_Tile" from="Ball" to="NN_AI_Player" method="_on_Ball_Moved_Tile"]
+[connection signal="Moved_Tile" from="Ball" to="AI_Player" method="_on_Ball_Moved_Tile"]
 [connection signal="body_entered" from="AreaGoalP" to="." method="_on_AreaGoalP_body_entered"]
 [connection signal="body_entered" from="AreaGoalP/AreaGoalAI" to="." method="_on_AreaGoalAI_body_entered"]
 [connection signal="timeout" from="StatsTimer" to="." method="_on_StatsTimer_timeout"]

@@ -28,10 +28,12 @@ func _on_Ball_Moved_Tile(indices : Vector2):
 # Signal handler for punishing AI
 # for missing Ball
 func _on_Game_punish_AI():
+	get_parent().misses += 1.0
 	self.position.y = 300.0
 
 # Signal handler for rewarding AI's
 # collective moves for a successful
 # Ball hit
 func _on_AI_Good_Boi(body):
+	get_parent().hits += 1.0
 	self.position.y = 300.0

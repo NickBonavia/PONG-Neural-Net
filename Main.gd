@@ -22,7 +22,7 @@ func _ready():
 		var minu = str(time.minute)
 		var hour = str(time.hour)
 		filenameDate = "AIStats_"+hour+minu+sec+".csv"
-		$StatsTimer.start(300)
+		$StatsTimer.start(120)
 
 # Signal handler for ball entering
 # Player goal
@@ -94,4 +94,4 @@ func _on_StatsTimer_timeout():
 	statsFile.close()
 	hits = 0.0
 	misses = 0.0
-	$StatsTimer.start(300)
+	$StatsTimer.start(120)

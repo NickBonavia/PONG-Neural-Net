@@ -73,7 +73,7 @@ func geneValue(ball: Vector2):
 	geneVals.clear()
 	geneVals.push_back(g0)
 	geneVals.push_back(g1)
-	print("slice[0]: " + String(geneVals[0].getValue()))
+	#print("slice[0]: " + String(geneVals[0].getValue()))
 
 func crossover(a: Byte, b: Byte, point: int) -> Byte:
 	var masks = [1, 3, 7, 15, 31, 63, 127]

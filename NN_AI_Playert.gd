@@ -147,7 +147,6 @@ func _on_AI_Good_Boi(body):
 		return
 	
 	get_parent().hits += 1.0
-	print("I'm Learning", stateStack.size())
 	
 	while !stateStack.empty():
 		var transition = stateStack.pop_front()

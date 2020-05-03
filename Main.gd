@@ -27,14 +27,12 @@ func _ready():
 # Signal handler for ball entering
 # Player goal
 func _on_AreaGoalP_body_entered(body):
-	print("Old Collective Learning Scored")
 	$Ball.resetBall()
 
 # Signal handlerfor ball entering
 # AI goal. Emits the punish_AI singal
 # when training
 func _on_AreaGoalAI_body_entered(body):
-	print("Neural Net Scored")
 	if play == false:
 		emit_signal("punish_AI")
 	$Ball.resetBall()
@@ -84,6 +82,7 @@ func _on_PlayMode_pressed():
 
 # Write hit/miss ratio to csv every 5 minutes
 func _on_StatsTimer_timeout():
+	return
 	minPassed += 5
 	if !statsFile.file_exists(filenameDate):
 		statsFile.open(filenameDate, File.WRITE)
